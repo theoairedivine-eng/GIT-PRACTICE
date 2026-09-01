@@ -3,248 +3,426 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bright Studio</title>
+    <title>Haven & Home | Real Estate</title>
     <style>
+        :root {
+            --primary: #1d5f5d;
+            --primary-dark: #154744;
+            --accent: #f2b84b;
+            --text: #1d2433;
+            --muted: #5f6c7b;
+            --bg: #f5f7f4;
+            --card: #ffffff;
+            --line: #e7ebea;
+            --shadow: 0 18px 40px rgba(17, 31, 32, 0.08);
+        }
+
+        * { box-sizing: border-box; }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f5f7fb;
-            color: #1d2433;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
         }
 
+        a { text-decoration: none; }
+
+        .container {
+            width: 90%;
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
         header {
-            background: linear-gradient(135deg, #1f2a44, #3a5ba0);
+            background: linear-gradient(rgba(11, 34, 33, 0.7), rgba(11, 34, 33, 0.7)),
+                url('https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
             color: white;
-            padding: 20px 0;
+            padding: 20px 0 120px;
         }
 
         nav {
-            width: 90%;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 90%;
+            max-width: 1180px;
+            margin: 0 auto;
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: bold;
-            letter-spacing: 1px;
+            letter-spacing: 0.04em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
         }
 
         .nav-links a {
             color: white;
-            text-decoration: none;
-            margin-left: 20px;
             font-size: 0.95rem;
         }
 
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 0 auto;
+        .nav-btn {
+            background: white;
+            color: var(--primary-dark);
+            padding: 12px 20px;
+            border-radius: 999px;
+            font-weight: bold;
         }
 
         .hero {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            width: 90%;
+            max-width: 1180px;
+            margin: 60px auto 0;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
             gap: 40px;
-            padding: 80px 0;
+            align-items: center;
         }
 
-        .hero-text {
-            flex: 1;
+        .hero-copy h1 {
+            font-size: 3.5rem;
+            line-height: 1.05;
+            margin: 0 0 18px;
+            max-width: 540px;
         }
 
-        .hero-text h1 {
-            font-size: 3rem;
-            margin: 0 0 20px;
-            line-height: 1.1;
+        .hero-copy p {
+            font-size: 1.08rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 28px;
+            max-width: 560px;
         }
 
-        .hero-text p {
-            font-size: 1.1rem;
-            margin-bottom: 25px;
-            color: #4b5770;
-        }
-
-        .btn-group {
+        .hero-actions {
             display: flex;
-            gap: 15px;
+            gap: 16px;
             flex-wrap: wrap;
+            margin-bottom: 24px;
         }
 
         .btn {
             display: inline-block;
-            padding: 14px 24px;
-            border-radius: 8px;
-            text-decoration: none;
+            padding: 15px 24px;
+            border-radius: 10px;
             font-weight: bold;
+            transition: 0.2s ease;
         }
 
         .btn-primary {
-            background: #3a5ba0;
-            color: white;
+            background: var(--accent);
+            color: #1d2433;
         }
 
         .btn-secondary {
-            background: #eaf0ff;
-            color: #1f2a44;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
         }
 
-        .hero-card {
-            flex: 1;
-            position: relative;
-            background: white;
-            padding: 12px;
-            border-radius: 18px;
-            box-shadow: 0 12px 30px rgba(31, 42, 68, 0.12);
-        }
-
-        .hero-carousel {
-            position: relative;
-            width: 100%;
-            height: 420px;
-            overflow: hidden;
-            border-radius: 18px;
-        }
-
-        .carousel-slide {
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-        }
-
-        .carousel-slide.active {
-            opacity: 1;
-        }
-
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 18px;
-            display: block;
-        }
-
-        .carousel-dots {
-            position: absolute;
-            bottom: 16px;
-            left: 50%;
-            transform: translateX(-50%);
+        .hero-stats {
             display: flex;
-            gap: 8px;
-            background: rgba(17, 24, 39, 0.35);
-            padding: 8px 12px;
-            border-radius: 999px;
+            gap: 28px;
+            flex-wrap: wrap;
         }
 
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.6);
-            cursor: pointer;
-            transition: background 0.3s ease;
+        .stat-box {
+            min-width: 110px;
         }
 
-        .dot.active {
-            background: white;
+        .stat-box strong {
+            display: block;
+            font-size: 1.8rem;
+            margin-bottom: 4px;
+        }
+
+        .stat-box span {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+        }
+
+        .search-card {
+            background: rgba(255,255,255,0.96);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: 22px;
+            color: var(--text);
+        }
+
+        .search-card h3 {
+            margin: 0 0 16px;
+            font-size: 1.2rem;
+        }
+
+        .search-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .search-grid input,
+        .search-grid select {
+            width: 100%;
+            padding: 14px 12px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: #f8faf9;
+            font-size: 0.96rem;
+        }
+
+        .search-card .btn {
+            margin-top: 10px;
+            width: 100%;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            border: none;
         }
 
         .section {
-            padding: 60px 0;
+            padding: 80px 0;
         }
 
-        .section h2 {
+        .section-header {
             text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 40px;
+            margin-bottom: 36px;
         }
 
-        .features {
+        .section-header small {
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .property-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
+            gap: 26px;
         }
 
-        .feature {
-            background: white;
-            border-radius: 14px;
-            padding: 25px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
-        }
-
-        .feature h3 {
-            margin-top: 0;
-        }
-
-        .feature-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 18px;
-            display: block;
-        }
-
-        .hero-image {
-            width: 100%;
-            height: 420px;
-            object-fit: cover;
+        .property-card {
+            background: var(--card);
             border-radius: 18px;
-            box-shadow: 0 12px 30px rgba(31, 42, 68, 0.12);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .property-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
             display: block;
         }
 
-        .cta {
-            background: #1f2a44;
-            color: white;
-            text-align: center;
-            padding: 60px 20px;
+        .property-body {
+            padding: 20px;
         }
 
-        .cta h2 {
-            margin-top: 0;
-            font-size: 2.2rem;
+        .property-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .price {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+        }
+
+        .tag {
+            background: #edf8f6;
+            color: var(--primary);
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: bold;
+        }
+
+        .property-name {
+            margin: 10px 0 8px;
+            font-size: 1.3rem;
+        }
+
+        .location {
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
+
+        .property-meta {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid var(--line);
+            padding-top: 12px;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .feature-box {
+            background: white;
+            padding: 28px 22px;
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #eef8f6;
+            color: var(--primary);
+            display: grid;
+            place-items: center;
+            font-size: 1.7rem;
+            margin: 0 auto 18px;
+        }
+
+        .feature-box h3 {
+            margin: 0 0 8px;
+        }
+
+        .feature-box p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .neighborhoods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .neighborhood-card {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            height: 260px;
+            box-shadow: var(--shadow);
+        }
+
+        .neighborhood-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.62));
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            color: white;
+        }
+
+        .overlay h3 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .cta-banner {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            border-radius: 24px;
+            padding: 42px 34px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .cta-banner h3 {
+            margin: 0 0 8px;
+            font-size: 2rem;
+        }
+
+        .cta-banner p {
+            margin: 0;
+            color: rgba(255,255,255,0.8);
         }
 
         footer {
-            text-align: center;
-            padding: 25px 0 40px;
-            color: #5d6983;
+            background: #0f1d1d;
+            color: #dfe8e7;
+            padding: 30px 0 50px;
+            margin-top: 80px;
         }
 
-        @media (max-width: 768px) {
-            .hero, .features {
+        .footer-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #dfe8e7;
+        }
+
+        @media (max-width: 900px) {
+            .hero,
+            .property-grid,
+            .features-grid,
+            .neighborhoods {
                 grid-template-columns: 1fr;
-                display: block;
             }
 
             .hero {
-                padding-top: 50px;
+                display: block;
             }
 
-            .hero-text h1 {
-                font-size: 2.3rem;
+            .hero-copy {
+                margin-bottom: 28px;
             }
 
-            nav {
+            .cta-banner {
                 flex-direction: column;
-                gap: 12px;
+                text-align: center;
             }
+        }
 
+        @media (max-width: 640px) {
             .nav-links {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
+                display: none;
             }
 
-            .nav-links a {
-                margin: 0 10px;
+            .hero-copy h1 {
+                font-size: 2.6rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
             }
         }
     </style>
@@ -252,113 +430,207 @@
 <body>
     <header>
         <nav>
-            <div class="logo">Bright Studio</div>
+            <div class="logo">Haven & Home</div>
             <div class="nav-links">
+                <a href="#buy">Buy</a>
+                <a href="#rent">Rent</a>
+                <a href="#sell">Sell</a>
                 <a href="#about">About</a>
-                <a href="#services">Services</a>
                 <a href="#contact">Contact</a>
+                <a class="nav-btn" href="#contact">Book a Tour</a>
             </div>
         </nav>
+
+        <div class="hero">
+            <div class="hero-copy">
+                <h1>Find a place that feels like home.</h1>
+                <p>
+                    Discover beautiful homes, smart investments, and welcoming neighborhoods designed around your lifestyle.
+                </p>
+                <div class="hero-actions">
+                    <a href="#buy" class="btn btn-primary">Explore Homes</a>
+                    <a href="#about" class="btn btn-secondary">Learn More</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-box">
+                        <strong>1200+</strong>
+                        <span>Homes Listed</span>
+                    </div>
+                    <div class="stat-box">
+                        <strong>98%</strong>
+                        <span>Client Satisfaction</span>
+                    </div>
+                    <div class="stat-box">
+                        <strong>24/7</strong>
+                        <span>Support</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-card">
+                <h3>Search for your next home</h3>
+                <div class="search-grid">
+                    <input type="text" placeholder="Location or city">
+                    <select>
+                        <option>Property type</option>
+                        <option>Apartment</option>
+                        <option>Villa</option>
+                        <option>Townhouse</option>
+                    </select>
+                    <select>
+                        <option>Budget</option>
+                        <option>$200k - $400k</option>
+                        <option>$400k - $700k</option>
+                        <option>$700k - $1M+</option>
+                    </select>
+                    <select>
+                        <option>Bedrooms</option>
+                        <option>1+ Bedroom</option>
+                        <option>2+ Bedrooms</option>
+                        <option>3+ Bedrooms</option>
+                    </select>
+                    <a href="#buy" class="btn">Search Listings</a>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <section class="container hero">
-            <div class="hero-text">
-                <h1>Build something bright.</h1>
-                <p>
-                    We help brands and businesses grow with simple, modern, and memorable digital experiences.
-                </p>
-                <div class="btn-group">
-                    <a class="btn btn-primary" href="#contact">Get Started</a>
-                    <a class="btn btn-secondary" href="#services">View Services</a>
-                </div>
+    <main class="container">
+        <section id="buy" class="section">
+            <div class="section-header">
+                <small>Featured homes</small>
+                <h2>Popular properties</h2>
             </div>
 
-            <div class="hero-card">
-                <div class="hero-carousel" aria-label="Featured project carousel">
-                    <div class="carousel-slide active">
-                        <img class="hero-image" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Team working together">
+            <div class="property-grid">
+                <article class="property-card">
+                    <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=900&q=80" alt="Modern family home exterior">
+                    <div class="property-body">
+                        <div class="property-top">
+                            <div class="price">$650,000</div>
+                            <div class="tag">For Sale</div>
+                        </div>
+                        <h3 class="property-name">Sunny Crest Villa</h3>
+                        <div class="location">Austin, Texas</div>
+                        <div class="property-meta">
+                            <span>4 Beds</span>
+                            <span>3 Baths</span>
+                            <span>2,450 sq ft</span>
+                        </div>
                     </div>
-                    <div class="carousel-slide">
-                        <img class="hero-image" src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="Business planning meeting">
-                    </div>
-                    <div class="carousel-slide">
-                        <img class="hero-image" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="Creative workspace and planning">
-                    </div>
+                </article>
 
-                    <div class="carousel-dots" aria-label="Carousel controls">
-                        <span class="dot active" data-slide="0" aria-label="Show slide 1"></span>
-                        <span class="dot" data-slide="1" aria-label="Show slide 2"></span>
-                        <span class="dot" data-slide="2" aria-label="Show slide 3"></span>
+                <article class="property-card">
+                    <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=80" alt="Apartment living room">
+                    <div class="property-body">
+                        <div class="property-top">
+                            <div class="price">$2,300/mo</div>
+                            <div class="tag">For Rent</div>
+                        </div>
+                        <h3 class="property-name">City View Apartment</h3>
+                        <div class="location">Seattle, Washington</div>
+                        <div class="property-meta">
+                            <span>2 Beds</span>
+                            <span>2 Baths</span>
+                            <span>1,100 sq ft</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="property-card">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80" alt="Luxury house exterior">
+                    <div class="property-body">
+                        <div class="property-top">
+                            <div class="price">$1,200,000</div>
+                            <div class="tag">New</div>
+                        </div>
+                        <h3 class="property-name">Harbor Point Home</h3>
+                        <div class="location">Miami, Florida</div>
+                        <div class="property-meta">
+                            <span>5 Beds</span>
+                            <span>4 Baths</span>
+                            <span>3,200 sq ft</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="section-header">
+                <small>Why choose us</small>
+                <h2>We make buying easy</h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-box">
+                    <div class="feature-icon">🏠</div>
+                    <h3>Smart Listings</h3>
+                    <p>Access carefully selected homes in the best neighborhoods and lifestyle communities.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">📍</div>
+                    <h3>Local Expertise</h3>
+                    <p>Our agents know the market, trends, and hidden gems buyers and renters love.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Trusted Guidance</h3>
+                    <p>From first viewing to final paperwork, we help every step feel simple and stress-free.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <small>Explore areas</small>
+                <h2>Best neighborhoods</h2>
+            </div>
+
+            <div class="neighborhoods">
+                <div class="neighborhood-card">
+                    <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=900&q=80" alt="Downtown city neighborhood">
+                    <div class="overlay">
+                        <h3>Downtown</h3>
+                    </div>
+                </div>
+                <div class="neighborhood-card">
+                    <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80" alt="Suburban residential neighborhood">
+                    <div class="overlay">
+                        <h3>Maple Grove</h3>
+                    </div>
+                </div>
+                <div class="neighborhood-card">
+                    <img src="https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=900&q=80" alt="Waterfront neighborhood">
+                    <div class="overlay">
+                        <h3>Harbor Bay</h3>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="services" class="container section">
-            <h2>Why choose us</h2>
-            <div class="features">
-                <div class="feature">
-                    <img class="feature-image" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt="Creative design workspace">
-                    <h3>Creative Design</h3>
-                    <p>Clean visuals and polished layouts that make your message stand out.</p>
+        <section id="contact" class="section">
+            <div class="cta-banner">
+                <div>
+                    <h3>Ready to find your dream home?</h3>
+                    <p>Talk to a local expert and schedule a private showing today.</p>
                 </div>
-                <div class="feature">
-                    <img class="feature-image" src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Business strategy planning session">
-                    <h3>Smart Strategy</h3>
-                    <p>Thoughtful planning to help you reach the right audience and grow faster.</p>
-                </div>
-                <div class="feature">
-                    <img class="feature-image" src="https://images.unsplash.com/photo-1522204523234-8729aa6e3d5f?auto=format&fit=crop&w=800&q=80" alt="Customer support conversation">
-                    <h3>Reliable Support</h3>
-                    <p>Friendly guidance and ongoing help to keep your business moving forward.</p>
-                </div>
+                <a href="mailto:hello@havenandhome.com" class="btn btn-primary">hello@havenandhome.com</a>
             </div>
-        </section>
-
-        <section id="about" class="container section">
-            <h2>Simple, modern, effective</h2>
-            <p style="text-align: center; max-width: 700px; margin: 0 auto; font-size: 1.05rem; color: #4b5770;">
-                We create digital experiences that are easy to use, visually appealing, and built around your goals.
-            </p>
         </section>
     </main>
 
-    <section id="contact" class="cta">
-        <h2>Ready to start your next project?</h2>
-        <a class="btn btn-primary" href="mailto:hello@brightstudio.com">hello@brightstudio.com</a>
-    </section>
-
     <footer>
-        © 2026 Bright Studio. All rights reserved.
+        <div class="container footer-wrap">
+            <div class="logo">Haven & Home</div>
+            <div class="footer-links">
+                <a href="#buy">Buy</a>
+                <a href="#rent">Rent</a>
+                <a href="#sell">Sell</a>
+                <a href="#about">About</a>
+            </div>
+            <div>© 2026 Haven & Home</div>
+        </div>
     </footer>
-
-    <script>
-        const slides = document.querySelectorAll('.carousel-slide');
-        const dots = document.querySelectorAll('.dot');
-        let currentSlide = 0;
-
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === index);
-            });
-
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
-        }
-
-        dots.forEach((dot) => {
-            dot.addEventListener('click', () => {
-                currentSlide = Number(dot.dataset.slide);
-                showSlide(currentSlide);
-            });
-        });
-
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
-        }, 3000);
-    </script>
 </body>
 </html>
